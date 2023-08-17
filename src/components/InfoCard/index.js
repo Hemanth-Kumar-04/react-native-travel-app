@@ -10,5 +10,4 @@ const InfoCard = ({ icon, text, style }) => {
         </View>
     );
 };
-
 export default React.memo(InfoCard);
