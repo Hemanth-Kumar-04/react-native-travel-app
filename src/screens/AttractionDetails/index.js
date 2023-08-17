@@ -29,8 +29,6 @@ ${item?.opening_time} - ${item?.closing_time}`;
     };
 
     const onShare = () => {
-        
-
             Share.open({
                 title: item?.name,
                 message: 'Hey, I wanted to share with you this amazing attraction',
