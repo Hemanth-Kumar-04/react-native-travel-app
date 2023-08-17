@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, ImageBackground, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import Share from 'react-native-share';
 import InfoCard from '../../components/InfoCard';
 import Title from '../../components/Title';
 import styles from './styles';
@@ -10,7 +11,8 @@ const AttractionDetails = ({ navigation, route }) => {
     const mainImage = item?.images?.length ? item?.images[0] : null;
     const slicedImages = item?.images?.length ? item?.images?.slice(0, 5) : [];
     const diffImages = item?.images?.length - slicedImages?.length;
-    const openingHours = `OPEN ${item?.opening_time} - ${item?.closing_time}`;
+    const openingHours = `OPEN
+${item?.opening_time} - ${item?.closing_time}`;
     const coords = {
         latitude: item?.coordinates?.lat,
         longitude: item?.coordinates?.lon,
@@ -26,8 +28,22 @@ const AttractionDetails = ({ navigation, route }) => {
         navigation.navigate('Gallery', { images: item?.images });
     };
 
+    const onShare = () => {
+        
 
-
+            Share.open({
+                title: item?.name,
+                message: 'Hey, I wanted to share with you this amazing attraction',
+               
+            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    err && console.log(err);
+                });
+   
+            };
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -39,6 +55,9 @@ const AttractionDetails = ({ navigation, route }) => {
                     <View style={styles.header}>
                         <Pressable onPress={onBack} hitSlop={8}>
                             <Image style={styles.icon} source={require('../../assets/back.png')} />
+                        </Pressable>
+                        <Pressable onPress={onShare} hitSlop={8}>
+                            <Image style={styles.icon} source={require('../../assets/share.png')} />
                         </Pressable>
                     </View>
 
