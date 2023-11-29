@@ -14,5 +14,4 @@ const AttractionCard = ({ imageSrc, title, subtitle, onPress, style }) => {
         </TouchableOpacity>
     );
 };
-
 export default React.memo(AttractionCard);
